@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 77168a09275cf664f9bde63dca21ac6e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _Chara1: {instanceID: 0}
+  - _Chara2: {instanceID: 0}
+  - _leftChara: {instanceID: 0}
+  - _rightChara: {instanceID: 0}
+  - _CharachterObject: {instanceID: 0}
+  - _imagePrefab: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
