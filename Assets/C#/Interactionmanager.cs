@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 namespace MyNamespace
 {
@@ -15,17 +14,7 @@ namespace MyNamespace
         {
             InteractionUI = false;
         }
-
         
-        private void OnTriggerEnter2D(Collider2D collision)
-        {
-            if (collision.CompareTag("Player"))
-            {
-                Debug.Log("Collision");
-                InteractionUI = true;
-            }
-            else InteractionUI = false;
-        }
         
     }
 }

@@ -8,23 +8,18 @@ namespace MyNamespace
     public class SceneController : MonoBehaviour
     {
         private float _delay = 1.5f; // 遅延時間（秒）
+        [SerializeField] Animator transitionAime; 
         private void Start()
-        {
-            GameManager.Instance.fadeEffectManager.FadeOutEffect(GameManager.Instance.imageManager.StartEffectImage.gameObject, 1f);
-        }
-
-        private void Awake()
         {
             if (GameManager.Instance.sceneController == null)
             {
                 GameManager.Instance.sceneController = this;
                 DontDestroyOnLoad(gameObject);
             }
-            /*else
-            {
-                Destroy(gameObject);
-            }*/
+            
+            GameManager.Instance.fadeEffectManager.FadeOutEffect(GameManager.Instance.imageManager.StartEffectImage.gameObject, 1f);
         }
+
         public void StartFinishSequence()
         {
             if (GameManager.Instance.imageManager.FinishEffectImage != null) GameManager.Instance.imageManager.FinishEffectImage = GameObject.Find("FinishFadeOut").GetComponent<Image>();
@@ -32,10 +27,7 @@ namespace MyNamespace
             Debug.Log("Player collided with the finish point.");
             // プレイヤーがゴールに到達したときの処理
                 /*
-                GameManager.Instance.fadeEffectManager.FadeOutEffect(finishEffectObject,1f);    
-                GameManager.Instance.audioManager.PlaySE("Clear");
-                GameManager.Instance.audioManager.StopBGM();
-                GameManager.Instance.audioManager.PlayBGM("NextLevel");
+                GameManager.Instance.fadeEffectManager.FadeOutEffect(finishEffectObject,1f);
                 */
                 StartCoroutine(LoadNextLevelAfterDelay());
                 // 1秒後にLoadNextLevelメソッドを呼び出す
@@ -43,18 +35,24 @@ namespace MyNamespace
             //else GameManager.Instance.sceneController.LoadScene(levelName);
             
         }
+        private void NextLevel()
+        {
+            StartCoroutine(LoadNextLevelAfterTransition());
+        }
+
         IEnumerator LoadNextLevelAfterDelay()
         {
             yield return new WaitForSeconds(_delay);
             GameManager.Instance.sceneController.NextLevel();
         }
-
-        public void NextLevel()
+        IEnumerator LoadNextLevelAfterTransition()
         {
+            transitionAime.SetTrigger("Start");
+            yield return new WaitForSeconds(1f);
             SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
-            Debug.Log("Next level loaded");
-            
+            transitionAime.SetTrigger("End");
         }
+        
         /*
         public void LoadScene(string sceneName)
         {

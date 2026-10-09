@@ -51,7 +51,7 @@ namespace MyNamespace
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.E) && GameManager.Instance.interactionManger.InteractionUI)
+            if (GameManager.Instance.eventManger._Istextevent && GameManager.Instance.interactionManger.InteractionUI)
             {
 
                 string sentence = GameManager.Instance.userScriptManager.GetCurrentSentence();

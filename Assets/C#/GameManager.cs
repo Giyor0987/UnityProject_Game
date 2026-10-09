@@ -24,14 +24,14 @@ namespace  MyNamespace
         public SceneController sceneController;
         public AudioManager audioManager;
         public StateMachine stateMachine;
-
+        public Eventmanger eventManger;
         [NonSerialized] public int lineNumber;//public but not serialized
         // Singleton Pattern
         void Awake()
         {
             
             Instance = this;
-
+            
             lineNumber = 0;
         }
     }

@@ -107,8 +107,14 @@ InitTestScene*.unity*
 
 # NuGetForUnity Packages floder
 /Packages/nuget-packages/InstalledPackages*
-
+#Packages
+/Packages/
 #Font folder
 *.ttf
 *.otf
 *.asset
+#HLSL
+*.cginc
+#PNG
+*png
+

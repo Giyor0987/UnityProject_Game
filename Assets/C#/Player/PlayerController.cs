@@ -13,12 +13,11 @@ public class PlayerController : MonoBehaviour
     //フィールドとローカル変数を区別するために_(アンダースコア)を付けるのだ:D
     [SerializeField] GameObject _bullet;
     [SerializeField] float _bulletDelay;
-    [SerializeField] float _Bulletspeed = 3.0f;
-    [SerializeField] float _JumpPower;
-    [SerializeField] float _sprintSpeed;
-    [SerializeField] float _baseMoveSpeed;
-    [SerializeField] float _stepSpeed;
-
+    [Header("弾の速度")][SerializeField] float _Bulletspeed = 3.0f;
+    [Header("ジャンプ力")][SerializeField] float _JumpPower;
+    [Header("ダッシュ速度")][SerializeField] float _sprintSpeed;
+    [Header("基本移動速度")][SerializeField] float _baseMoveSpeed;
+    [Header("ステップ速度")][SerializeField] float _stepSpeed;
     public bool IsDead { get; private set; }
     private bool _jumpRequested;
     private bool _IsGround;
@@ -110,7 +109,8 @@ public class PlayerController : MonoBehaviour
             desiredState = _jumpState;
         }
         
-        else if (_horizontalInput != 0f)
+
+        if (_horizontalInput != 0f)
         {
             desiredState = _walkState;
         }
@@ -178,6 +178,7 @@ public class PlayerController : MonoBehaviour
             bulletIns = Instantiate(_bullet, spawnPos, Quaternion.identity);
             bulletIns.GetComponent<Rigidbody2D>().velocity = dir * _Bulletspeed;
             _bulletTime -= _bulletTime;
+            //GameManager.Instance.audioManager.PlaySE(_bulletSE);
         }
 
     }
@@ -195,6 +196,10 @@ public class PlayerController : MonoBehaviour
                 _IsGround = true;
                 Debug.Log("damage taken");
                 break;
+            case "Interaction":
+                GameManager.Instance.interactionManger.InteractionUI = true;
+                Debug.Log("インタラクティブ");
+                break;
         }
         
             
@@ -208,5 +213,9 @@ public class PlayerController : MonoBehaviour
         }
         else _IsGround = true;
 
+        if(collision.gameObject.CompareTag("Interaction"))
+        {
+            GameManager.Instance.eventManger._Istextevent = false;
+        }
     }
 }

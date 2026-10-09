@@ -10,9 +10,11 @@ namespace MyNamespace
     {
         [SerializeField] TextAsset _textFile;
         List<string> _sentence = new List<string>();
-
+        Dictionary<string, string> _textFiles;
         void Awake()
         {
+            _textFiles = new Dictionary<string, string>();
+            
             if (_textFile == null)
             {
                 Debug.LogWarning("LoadScript: textFile is null!");
@@ -22,7 +24,7 @@ namespace MyNamespace
             StringReader reader = new StringReader(_textFile.text);
             while (reader.Peek() != -1)//Peek()は読み込んだreaderのTextが空白なら-1を返す
             {
-                string line = reader.ReadLine();//ここで_textFileを読み込んでline箱に入れる [役目：右辺でテキストファイルを読む。]
+                string line = reader.ReadLine();
 
                 _sentence.Add(line);
                 //そしてその中身を_sentenceというListという配列型の箱に入れる

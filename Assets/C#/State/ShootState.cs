@@ -13,17 +13,17 @@ public class ShootState :IState
     }
     public void Enter()
     {
-        Debug.Log("ShotState‚É“ü‚è‚Ü‚µ‚½");
+        //Debug.Log("ShotState‚É“ü‚è‚Ü‚µ‚½");
         anime.SetBool("isShoot", true);
     }
     public void Update()
     {
-        Debug.Log("ShotState‚ÌUpdate");
+        //Debug.Log("ShotState‚ÌUpdate");
         anime.SetBool("isShoot", true);
     }
     public void Exit()
     {
-        Debug.Log("ShotState‚©‚ço‚Ü‚µ‚½");
+        //Debug.Log("ShotState‚©‚ço‚Ü‚µ‚½");
         anime.SetBool("isShoot", false);
     }
 }

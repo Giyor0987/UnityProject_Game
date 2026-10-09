@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks.Triggers;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,8 +16,9 @@ namespace MyNamespace
         [SerializeField] GameObject _leftChara;
         [SerializeField] GameObject _rightChara;
         [SerializeField] GameObject _imagePrefab;
-        [SerializeField] Canvas canvas;
+        [SerializeField] GameObject playerUI;
         [SerializeField] Image textWindow;
+
         [SerializeField] RectTransform _textWindowParentObject;
         Dictionary<string, Sprite> _CharactersSprites;
         Dictionary<string, GameObject> _CharacterParentObject;
@@ -63,8 +65,10 @@ namespace MyNamespace
             
             GameManager.Instance.imageDisplayManager.SetAspect(item, image);
 
-
-            GameManager.Instance.fadeEffectManager.FadeOutEffect(GameManager.Instance.helthController.playerUI, 1f);
+            if (parentObjectName == "MainChara")
+            {
+                GameManager.Instance.fadeEffectManager.FadeOutEffect(playerUI, 1f);
+            }
             GameManager.Instance.fadeEffectManager.FadeInEffect(item,1f);
             
 
@@ -82,7 +86,7 @@ namespace MyNamespace
             }
 
             GameManager.Instance.fadeEffectManager.FadeOutEffect(_CharactersSpriteObject[imageName], 1f);
-            GameManager.Instance.fadeEffectManager.FadeInEffect(GameManager.Instance.helthController.playerUI, 1f);
+            GameManager.Instance.fadeEffectManager.FadeInEffect(playerUI, 1f);
             _CharactersSpriteObject.Remove(imageName);//list in Dictionary, stuck imageName and item
         }
     }
