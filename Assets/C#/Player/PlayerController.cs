@@ -183,6 +183,24 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Interaction"))
+        {
+            GameManager.Instance.interactionManger.InteractionUI = true;
+            Debug.Log("インタラクティブ");
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Interaction"))
+        {
+            GameManager.Instance.interactionManger.InteractionUI = false;
+            Debug.Log("インタラクティブ終了");
+        }
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         
@@ -195,10 +213,6 @@ public class PlayerController : MonoBehaviour
                 GameManager.Instance.helthController.TakeDamage(GameManager.Instance.helthController._damageAmount);
                 _IsGround = true;
                 Debug.Log("damage taken");
-                break;
-            case "Interaction":
-                GameManager.Instance.interactionManger.InteractionUI = true;
-                Debug.Log("インタラクティブ");
                 break;
         }
         
